@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:smartmilk/ui/Manager/ProfileUser.dart';
+import 'package:smartmilk/ui/User/ProfileUser.dart';
 
 void main() {
   runApp(const MyApp());
@@ -61,47 +63,6 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class AdminPage extends StatelessWidget {
-  const AdminPage({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Administrador'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
-      body: const Center(
-        child: Text('Bienvenido Administrador', style: TextStyle(fontSize: 20)),
-      ),
-    );
-  }
-}
 
-class UserPage extends StatelessWidget {
-  const UserPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Usuario'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
-      body: const Center(
-        child: Text('Bienvenido Usuario', style: TextStyle(fontSize: 20)),
-      ),
-    );
-  }
-}
 
