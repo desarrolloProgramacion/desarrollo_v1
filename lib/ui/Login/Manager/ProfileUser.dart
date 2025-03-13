@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smartmilk/ui/MainPage/MangerPage/ManagerPage.dart';
 
 import '../../../utils/Colors.dart';
 
@@ -69,7 +70,11 @@ class AdminPage extends StatelessWidget {
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.pushReplacementNamed(context, '/managerPage');
+                    Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const managerPage()),
+                  );
+
                   },
                   child: const Text('Iniciar sesión'),
                 ),
