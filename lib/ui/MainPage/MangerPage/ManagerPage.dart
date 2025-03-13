@@ -9,6 +9,7 @@ class managerPage extends StatefulWidget {
 
 class _managerPageState extends State<managerPage> {
   bool isExpanded = false;
+  bool showExtraIcons = false;
   Widget? selectedView;
 
   void changeView(Widget view) {
@@ -22,20 +23,39 @@ class _managerPageState extends State<managerPage> {
     return Scaffold(
       body: Row(
         children: [
-          Expanded(
-            flex: isExpanded ? 0 : 2,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                buildButton('Agregar', Container(color: Colors.blue, child: Center(child: Text('Agregar Vista')))),
-                buildButton('Registrar', Container(color: Colors.green, child: Center(child: Text('Registrar Vista')))),
-                buildButton('Mostrar', Container(color: Colors.orange, child: Center(child: Text('Mostrar Vista')))),
-                buildButton('Liquidación', Container(color: Colors.red, child: Center(child: Text('Liquidación Vista')))),
-              ],
+          if (!isExpanded) // Oculta los botones cuando está expandido
+            Expanded(
+              flex: 2,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.menu),
+                    onPressed: () {
+                      setState(() {
+                        showExtraIcons = !showExtraIcons;
+                      });
+                    },
+                  ),
+                  if (showExtraIcons) ...[
+                    IconButton(
+                      icon: Icon(Icons.settings),
+                      onPressed: () {},
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.info),
+                      onPressed: () {},
+                    ),
+                  ],
+                  buildButton('Agregar', Container(color: Colors.blue, child: Center(child: Text('Agregar Vista')))),
+                  buildButton('Registrar', Container(color: Colors.green, child: Center(child: Text('Registrar Vista')))),
+                  buildButton('Mostrar', Container(color: Colors.orange, child: Center(child: Text('Mostrar Vista')))),
+                  buildButton('Liquidación', Container(color: Colors.red, child: Center(child: Text('Liquidación Vista')))),
+                ],
+              ),
             ),
-          ),
           Expanded(
-            flex: isExpanded ? 10 : 6,
+            flex: 10,
             child: Stack(
               children: [
                 Container(
@@ -72,3 +92,4 @@ class _managerPageState extends State<managerPage> {
     );
   }
 }
+
