@@ -27,15 +27,18 @@ class _managerPageState extends State<managerPage> {
             Expanded(
               flex: 2,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  IconButton(
-                    icon: Icon(Icons.menu),
-                    onPressed: () {
-                      setState(() {
-                        showExtraIcons = !showExtraIcons;
-                      });
-                    },
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: IconButton(
+                      icon: Icon(Icons.menu),
+                      onPressed: () {
+                        setState(() {
+                          showExtraIcons = !showExtraIcons;
+                        });
+                      },
+                    ),
                   ),
                   if (showExtraIcons) ...[
                     IconButton(
