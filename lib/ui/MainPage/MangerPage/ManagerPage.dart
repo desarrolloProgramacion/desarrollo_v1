@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import '../../../utils/Colors.dart';
+import 'Pages/AgregarPage.dart';
+import 'Pages/LiquidacionPage.dart';
+import 'Pages/MostrarPage.dart';
+import 'Pages/RegistrarPage.dart';
+
 
 class managerPage extends StatefulWidget {
   const managerPage({super.key});
@@ -23,47 +29,57 @@ class _managerPageState extends State<managerPage> {
     return Scaffold(
       body: Row(
         children: [
-          if (!isExpanded) // Oculta los botones cuando está expandido
+          if (!isExpanded)
             Expanded(
               flex: 2,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: IconButton(
-                      icon: Icon(Icons.menu),
-                      onPressed: () {
-                        setState(() {
-                          showExtraIcons = !showExtraIcons;
-                        });
-                      },
+              child: Container(
+                color: AppColors.fifthColor,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: IconButton(
+                        icon: const Icon(Icons.menu),
+                        onPressed: () {
+                          setState(() {
+                            showExtraIcons = !showExtraIcons;
+                          });
+                        },
+                      ),
                     ),
-                  ),
-                  if (showExtraIcons) ...[
-                    IconButton(
-                      icon: Icon(Icons.settings),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.info),
-                      onPressed: () {},
-                    ),
+                    if (showExtraIcons) ...[
+                      IconButton(
+                        icon: const Icon(Icons.settings),
+                        onPressed: () {},
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.info),
+                        onPressed: () {},
+                      ),
+                    ],
+                    buildButton('Agregar', const AgregarPage()),
+                    buildButton('Registrar', const RegistrarPage()),
+                    buildButton('Mostrar', const MostrarPage()),
+                    buildButton('Liquidación', const LiquidacionPage()),
                   ],
-                  buildButton('Agregar', Container(color: Colors.blue, child: Center(child: Text('Agregar Vista')))),
-                  buildButton('Registrar', Container(color: Colors.green, child: Center(child: Text('Registrar Vista')))),
-                  buildButton('Mostrar', Container(color: Colors.orange, child: Center(child: Text('Mostrar Vista')))),
-                  buildButton('Liquidación', Container(color: Colors.red, child: Center(child: Text('Liquidación Vista')))),
-                ],
+                ),
               ),
             ),
+
           Expanded(
             flex: 10,
             child: Stack(
               children: [
                 Container(
-                  color: Colors.grey[200],
-                  child: selectedView ?? Center(child: Text('Seleccione una opción', style: TextStyle(fontSize: 18))),
+                  color: AppColors.fifthColor,
+                  child: selectedView ??
+                      const Center(
+                        child: Text(
+                          'Seleccione una opción',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
                 ),
                 Positioned(
                   bottom: 10,
@@ -95,4 +111,3 @@ class _managerPageState extends State<managerPage> {
     );
   }
 }
-

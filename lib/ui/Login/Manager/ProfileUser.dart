@@ -9,6 +9,25 @@ class AdminPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Administrador',
+          style: TextStyle(
+            color: AppColors.primaryColor, // Color del texto
+            fontSize: 20, // Tamaño del texto
+            fontWeight: FontWeight.bold, // Opcional: negrita
+          ),
+        ),
+        backgroundColor: AppColors.fourthColor, // Color de fondo del AppBar
+        elevation: 4, // Opcional: sombra para destacar el AppBar
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: AppColors.primaryColor, ), // Color del ícono
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+
       body: Container(
         decoration: const BoxDecoration(
           gradient: AppColors.radialGradient,
@@ -19,24 +38,12 @@ class AdminPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                AppBar(
-                  title: const Text('Administrador'),
-                  backgroundColor: Colors.transparent,
-                  elevation: 0, // Elimina la sombra
-                  leading: IconButton(
-                    icon: const Icon(Icons.arrow_back, color: Colors.white),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ),
-                const SizedBox(height: 20),
                 const Text(
                   'Escriba sus credenciales',
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 25,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white, // Para que el texto contraste
+                    color: AppColors.fifthColor, // Para que el texto contraste
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -69,15 +76,24 @@ class AdminPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.fifthColor, // Color de fondo del botón
+                    foregroundColor: Colors.white, // Color del texto
+                    textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8), // Bordes redondeados
+                    ),
+                  ),
                   onPressed: () {
                     Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => const managerPage()),
-                  );
-
+                      context,
+                      MaterialPageRoute(builder: (context) => const managerPage()),
+                    );
                   },
                   child: const Text('Iniciar sesión'),
                 ),
+
               ],
             ),
           ),
@@ -86,3 +102,4 @@ class AdminPage extends StatelessWidget {
     );
   }
 }
+
