@@ -5,7 +5,6 @@ import 'Pages/LiquidacionPage.dart';
 import 'Pages/MostrarPage.dart';
 import 'Pages/RegistrarPage.dart';
 
-
 class managerPage extends StatefulWidget {
   const managerPage({super.key});
 
@@ -33,7 +32,7 @@ class _managerPageState extends State<managerPage> {
             Expanded(
               flex: 2,
               child: Container(
-                color: AppColors.fifthColor,
+                color: AppColors.fifthColor, // Color de fondo del menú lateral
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -41,6 +40,7 @@ class _managerPageState extends State<managerPage> {
                       padding: const EdgeInsets.all(8.0),
                       child: IconButton(
                         icon: const Icon(Icons.menu),
+                        color: AppColors.primaryColor, // Color del ícono
                         onPressed: () {
                           setState(() {
                             showExtraIcons = !showExtraIcons;
@@ -51,10 +51,12 @@ class _managerPageState extends State<managerPage> {
                     if (showExtraIcons) ...[
                       IconButton(
                         icon: const Icon(Icons.settings),
+                        color: AppColors.secondaryColor, // Color del ícono
                         onPressed: () {},
                       ),
                       IconButton(
                         icon: const Icon(Icons.info),
+                        color: AppColors.secondaryColor, // Color del ícono
                         onPressed: () {},
                       ),
                     ],
@@ -74,10 +76,10 @@ class _managerPageState extends State<managerPage> {
                 Container(
                   color: AppColors.fifthColor,
                   child: selectedView ??
-                      const Center(
+                      Center(
                         child: Text(
                           'Seleccione una opción',
-                          style: TextStyle(fontSize: 18),
+                          style: TextStyle(fontSize: 18, color: AppColors.primaryColor),
                         ),
                       ),
                 ),
@@ -85,12 +87,16 @@ class _managerPageState extends State<managerPage> {
                   bottom: 10,
                   left: 10,
                   child: FloatingActionButton(
+                    backgroundColor: AppColors.secondaryColor, // Color del botón flotante
                     onPressed: () {
                       setState(() {
                         isExpanded = !isExpanded;
                       });
                     },
-                    child: Icon(isExpanded ? Icons.fullscreen_exit : Icons.fullscreen),
+                    child: Icon(
+                      isExpanded ? Icons.fullscreen_exit : Icons.fullscreen,
+                      color: AppColors.primaryColor, // Color del ícono
+                    ),
                   ),
                 ),
               ],
@@ -106,7 +112,17 @@ class _managerPageState extends State<managerPage> {
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: ElevatedButton(
         onPressed: () => changeView(view),
-        child: Text(text),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.secondaryColor, // Color de fondo del botón
+          foregroundColor: AppColors.fifthColor, // Color del texto
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10), // Bordes redondeados
+          ),
+        ),
+        child: Text(
+          text,
+          style: const TextStyle(fontSize: 16),
+        ),
       ),
     );
   }
