@@ -14,20 +14,21 @@ class _AgregarPageState extends State<AgregarPage> {
 
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _userCodeController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _cedulaController = TextEditingController();
+  final TextEditingController _telefonoController = TextEditingController();
 
   void _agregarUsuario() {
     if (_formKey.currentState!.validate()) {
       String nombre = _nameController.text;
       String codigoUsuario = _userCodeController.text;
-      String contrasena = _passwordController.text;
+      String cedula = _cedulaController.text;
+      String telefono = _telefonoController.text;
 
       // Aquí puedes manejar la lógica para guardar el usuario
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            'Usuario $nombre (Código: $codigoUsuario) agregado con éxito!',
+            'Usuario $nombre (Código: $codigoUsuario, Cédula: $cedula, Teléfono: $telefono) agregado con éxito!',
             style: const TextStyle(color: Colors.white),
           ),
           backgroundColor: Colors.green,
@@ -37,8 +38,8 @@ class _AgregarPageState extends State<AgregarPage> {
       // Limpia los campos después de agregar
       _nameController.clear();
       _userCodeController.clear();
-      _passwordController.clear();
-      _confirmPasswordController.clear();
+      _cedulaController.clear();
+      _telefonoController.clear();
     }
   }
 
@@ -46,8 +47,8 @@ class _AgregarPageState extends State<AgregarPage> {
   Widget build(BuildContext context) {
     return Theme(
       data: ThemeData(
-        primaryColor: AppColors.tertiaryColor, // Color primario
-        scaffoldBackgroundColor: AppColors.secondaryColor, // Color de fondo
+        primaryColor: AppColors.tertiaryColor,
+        scaffoldBackgroundColor: AppColors.secondaryColor,
         inputDecorationTheme: const InputDecorationTheme(
           filled: true,
           fillColor: AppColors.primaryColor,
@@ -56,8 +57,8 @@ class _AgregarPageState extends State<AgregarPage> {
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.fourthColor, // Color del botón
-            foregroundColor: Colors.white, // Color del texto del botón
+            backgroundColor: AppColors.fourthColor,
+            foregroundColor: Colors.white,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),
@@ -67,8 +68,8 @@ class _AgregarPageState extends State<AgregarPage> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Agregar Usuario"),
-          backgroundColor: AppColors.tertiaryColor, // Color del AppBar
-          automaticallyImplyLeading: false, // Elimina el botón de retroceso
+          backgroundColor: AppColors.tertiaryColor,
+          automaticallyImplyLeading: false,
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -90,7 +91,7 @@ class _AgregarPageState extends State<AgregarPage> {
                 const SizedBox(height: 10),
                 TextFormField(
                   controller: _userCodeController,
-                  decoration: const InputDecoration(labelText: "Código de Usuario"),
+                  decoration: const InputDecoration(labelText: "Código Usuario"),
                   keyboardType: TextInputType.number,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -104,24 +105,30 @@ class _AgregarPageState extends State<AgregarPage> {
                 ),
                 const SizedBox(height: 10),
                 TextFormField(
-                  controller: _passwordController,
-                  decoration: const InputDecoration(labelText: "Contraseña"),
-                  obscureText: true,
+                  controller: _cedulaController,
+                  decoration: const InputDecoration(labelText: "Cédula"),
+                  keyboardType: TextInputType.number,
                   validator: (value) {
-                    if (value == null || value.length < 6) {
-                      return "La contraseña debe tener al menos 6 caracteres";
+                    if (value == null || value.isEmpty) {
+                      return "Ingrese la cédula";
+                    }
+                    if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
+                      return "La cédula debe ser numérica";
                     }
                     return null;
                   },
                 ),
                 const SizedBox(height: 10),
                 TextFormField(
-                  controller: _confirmPasswordController,
-                  decoration: const InputDecoration(labelText: "Confirmar Contraseña"),
-                  obscureText: true,
+                  controller: _telefonoController,
+                  decoration: const InputDecoration(labelText: "Teléfono"),
+                  keyboardType: TextInputType.phone,
                   validator: (value) {
-                    if (value != _passwordController.text) {
-                      return "Las contraseñas no coinciden";
+                    if (value == null || value.isEmpty) {
+                      return "Ingrese el teléfono";
+                    }
+                    if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
+                      return "El teléfono debe ser numérico";
                     }
                     return null;
                   },
