@@ -9,23 +9,10 @@ class AdminPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Administrador',
-          style: TextStyle(
-            color: AppColors.primaryColor,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        backgroundColor: AppColors.fourthColor.withOpacity(0.9),
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: AppColors.primaryColor),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+      extendBodyBehindAppBar: true,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(60),
+        child: _GlassmorphicAppBar(),
       ),
       body: Container(
         decoration: const BoxDecoration(
@@ -100,6 +87,110 @@ class AdminPage extends StatelessWidget {
                       ),
                     ],
                   ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _GlassmorphicAppBar extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.15),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: Colors.white.withOpacity(0.3),
+          width: 1.5,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 20,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: AppBar(
+        title: const Text(
+          'Administrador',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: _GlassmorphicBackButton(),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+      ),
+    );
+  }
+}
+
+class _GlassmorphicBackButton extends StatefulWidget {
+  @override
+  State<_GlassmorphicBackButton> createState() => _GlassmorphicBackButtonState();
+}
+
+class _GlassmorphicBackButtonState extends State<_GlassmorphicBackButton> {
+  bool _isHovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: MouseRegion(
+        onEnter: (_) => setState(() => _isHovered = true),
+        onExit: (_) => setState(() => _isHovered = false),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+          transform: Matrix4.identity()..scale(_isHovered ? 1.1 : 1.0),
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(_isHovered ? 0.25 : 0.15),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: Colors.white.withOpacity(_isHovered ? 0.5 : 0.3),
+              width: 1.5,
+            ),
+            boxShadow: _isHovered
+                ? [
+              BoxShadow(
+                color: AppColors.fifthColor.withOpacity(0.4),
+                blurRadius: 15,
+                spreadRadius: 2,
+              ),
+            ]
+                : [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 6,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              borderRadius: BorderRadius.circular(12),
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Center(
+                child: Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                  size: 24,
                 ),
               ),
             ),
