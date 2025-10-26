@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  // Colores base más modernos estilo iOS - tonos más suaves y elegantes
-  static const Color primaryColor = Color(0xFFF5F5F7); // Gris muy claro, casi blanco
-  static const Color secondaryColor = Color(0xFFE8F4F8); // Azul muy suave
-  static const Color tertiaryColor = Color(0xFFB8E6D5); // Verde agua claro
-  static const Color fourthColor = Color(0xFF7BC4B8); // Verde azulado medio
-  static const Color fifthColor = Color(0xFF5A9D8C); // Verde azulado profundo
+  // Colores base modernos con tonos azules profundos y elegantes
+  static const Color primaryColor = Color(0xFF0A1128); // Azul marino profundo
+  static const Color secondaryColor = Color(0xFF1B2845); // Azul oscuro
+  static const Color tertiaryColor = Color(0xFF2E4F6E); // Azul medio
+  static const Color fourthColor = Color(0xFF4A7BA7); // Azul cielo
+  static const Color fifthColor = Color(0xFF6BA3D4); // Azul brillante
 
   // Degradado lineal
   static const LinearGradient linearGradient = LinearGradient(
@@ -22,4 +22,3 @@ class AppColors {
     colors: [primaryColor, secondaryColor, tertiaryColor, fourthColor, fifthColor],
   );
 }
-
